@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 
 export function Content() {
   const [movies, setMovies] = useState([]);
+  const [isMoviesShowVisible, setIsMoviesShowVisible] = useState(false);
+  const [currentMovie, setCurrentMovie] = useState({});
+
   const handleIndexMovies = () => {
     console.log("handleIndexMovies");
     axios.get("http://localhost:3000/movies.json").then((response) => {
@@ -16,9 +19,8 @@ export function Content() {
       setMovies(response.data);
     });
   };
+
   useEffect(handleIndexMovies, []);
-  const [isMoviesShowVisible, setIsMoviesShowVisible] = useState(false);
-  const [currentMovie, setCurrentMovie] = useState({});
 
   const handleShowMovie = (movie) => {
     console.log("handleShowMovie", movie);
@@ -37,6 +39,7 @@ export function Content() {
       <Login />
       <LogoutLink />
       <MoviesIndex movies={movies} onShowMovie={handleShowMovie} />
+
       <Modal show={isMoviesShowVisible} onClose={handleClose}>
         <MoviesShow movie={currentMovie} />
       </Modal>
