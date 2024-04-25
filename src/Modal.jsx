@@ -7,9 +7,9 @@ export function Modal(props) {
       <div className="modal-background">
         <section className="modal-main">
           {props.children}
-          <button className="close" type="button" onClick={props.onCLose}>
+          <button className="close" type="button" onClick={props.onClose}>
             {" "}
-            close
+            &#x2715;
           </button>
         </section>
       </div>

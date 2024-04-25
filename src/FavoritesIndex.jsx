@@ -7,7 +7,7 @@ export function FavoritesIndex(props) {
         <div key={favorite.id}>
           <h2>{favorite.user_id}</h2>
           <h2>{favorite.movie_id}</h2>
-          <button onClick={() => props.onShowFavorite(favorite)}>Favorites</button>
+          <button onClick={() => props.onShowFavorite(favorite)}>Remove Favorite</button>
         </div>
       ))}
     </div>
