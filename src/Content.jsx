@@ -63,6 +63,13 @@ export function Content() {
     setIsFavoritesShowVisible(false);
   };
 
+  const handleDestroyFavorite = (id) => {
+    console.log("handleDestroyFavorite", id);
+    axios.delete(`http://localhost:3000/favorites/${id}.json`).then((response) => {
+      setFavorites(favorites.filter((favorites) => favorite.id !== id));
+      handleClose();
+    });
+  };
   return (
     <main>
       <h1>Title</h1>
@@ -73,7 +80,7 @@ export function Content() {
       <MoviesIndex movies={movies} onShowMovie={handleShowMovie} />
       <FavoritesIndex favorites={favorites} onShowFavorite={handleShowFavorite} />
       <Modal2 show={isFavoritesshowVisiible} onClose={handleClose}>
-        <FavoritesShow favorite={currentFavorite} />
+        <FavoritesShow favorite={currentFavorite} onDestroyFavorite={handleDestroyFavorite} />
       </Modal2>
       <Modal show={isMoviesShowVisible} onClose={handleClose}>
         <MoviesShow movie={currentMovie} />
