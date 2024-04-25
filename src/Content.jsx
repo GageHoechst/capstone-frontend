@@ -6,6 +6,7 @@ import { MoviesIndex } from "./MoviesIndex";
 import { MoviesShow } from "./MoviesShow";
 import { FavoritesIndex } from "./FavoritesIndex";
 import { FavoritesNew } from "./FavoritesNew";
+import { FavoritesShow } from "./FavoritesShow";
 import { Modal } from "./Modal";
 import { Modal2 } from "./Modal2";
 import { useEffect, useState } from "react";
@@ -51,15 +52,15 @@ export function Content() {
     setIsMoviesShowVisible(true);
     setCurrentMovie(movie);
   };
-  const handleClose = () => {
-    console.log("handleClose");
-    setIsMoviesShowVisible(false);
-    setIsFavoritesShowVisible(false);
-  };
   const handleShowFavorite = (favorite) => {
     console.log("handleShowFavorite", favorite);
     setIsFavoritesShowVisible(true);
     setCurrentFavorite(favorite);
+  };
+  const handleClose = () => {
+    console.log("handleClose");
+    setIsMoviesShowVisible(false);
+    setIsFavoritesShowVisible(false);
   };
 
   return (
@@ -72,7 +73,7 @@ export function Content() {
       <MoviesIndex movies={movies} onShowMovie={handleShowMovie} />
       <FavoritesIndex favorites={favorites} onShowFavorite={handleShowFavorite} />
       <Modal2 show={isFavoritesshowVisiible} onClose={handleClose}>
-        + <h1>Test</h1>+{" "}
+        <FavoritesShow favorite={currentFavorite} />
       </Modal2>
       <Modal show={isMoviesShowVisible} onClose={handleClose}>
         <MoviesShow movie={currentMovie} />
