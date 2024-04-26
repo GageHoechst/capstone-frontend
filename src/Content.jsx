@@ -72,7 +72,7 @@ export function Content() {
   };
   return (
     <main>
-      <h1>Title</h1>
+      <h1>CinemaScope</h1>
       <Signup />
       <Login />
       <LogoutLink />
