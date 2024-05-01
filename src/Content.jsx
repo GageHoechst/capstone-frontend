@@ -8,6 +8,7 @@ import { FavoritesIndex } from "./FavoritesIndex";
 import { FavoritesNew } from "./FavoritesNew";
 import { FavoritesShow } from "./FavoritesShow";
 import { ReviewsIndex } from "./ReviewsIndex";
+import { ReviewsNew } from "./ReviewsNew";
 import { Modal } from "./Modal";
 import { Modal2 } from "./Modal2";
 import { useEffect, useState } from "react";
@@ -83,6 +84,14 @@ export function Content() {
   };
   useEffect(handleIndexReviews, []);
 
+  const handleCreateReview = (params, successCallback) => {
+    console.log("handleCreateReview", params);
+    axios.post("http://localhost:3000/reviews.json", params).then((response) => {
+      setReviews([...reviews, response.data]);
+      successCallback();
+    });
+  };
+
   return (
     <main>
       <h1>CinemaScope</h1>
@@ -90,6 +99,7 @@ export function Content() {
       <Login />
       <LogoutLink />
       <FavoritesNew onCreateFavorite={handleCreateFavorite} />
+      <ReviewsNew onCreateReview={handleCreateReview} />
       <MoviesIndex movies={movies} onShowMovie={handleShowMovie} />
       <ReviewsIndex reviews={reviews} />
       <FavoritesIndex favorites={favorites} onShowFavorite={handleShowFavorite} />
