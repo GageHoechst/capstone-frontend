@@ -7,6 +7,7 @@ import { MoviesShow } from "./MoviesShow";
 import { FavoritesIndex } from "./FavoritesIndex";
 import { FavoritesNew } from "./FavoritesNew";
 import { FavoritesShow } from "./FavoritesShow";
+import { ReviewsIndex } from "./ReviewsIndex";
 import { Modal } from "./Modal";
 import { Modal2 } from "./Modal2";
 import { useEffect, useState } from "react";
@@ -70,6 +71,18 @@ export function Content() {
       handleClose();
     });
   };
+
+  const [reviews, setReviews] = useState([]);
+
+  const handleIndexReviews = () => {
+    console.log("handleIndexReviews");
+    axios.get("http://localhost:3000/reviews.json").then((response) => {
+      console.log(response.data);
+      setReviews(response.data);
+    });
+  };
+  useEffect(handleIndexReviews, []);
+
   return (
     <main>
       <h1>CinemaScope</h1>
@@ -78,6 +91,7 @@ export function Content() {
       <LogoutLink />
       <FavoritesNew onCreateFavorite={handleCreateFavorite} />
       <MoviesIndex movies={movies} onShowMovie={handleShowMovie} />
+      <ReviewsIndex reviews={reviews} />
       <FavoritesIndex favorites={favorites} onShowFavorite={handleShowFavorite} />
       <Modal2 show={isFavoritesshowVisiible} onClose={handleClose}>
         <FavoritesShow favorite={currentFavorite} onDestroyFavorite={handleDestroyFavorite} />
