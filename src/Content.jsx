@@ -101,6 +101,22 @@ export function Content() {
       successCallback();
     });
   };
+  const handleUpdateReview = (id, params, successCallback) => {
+    console.log("handleUpdateReview", params);
+    axios.patch("http://localhost:3000/reviews/${id}.json", params).then((response) => {
+      setReviews(
+        reviews.map((review) => {
+          if (review.id === response.data.id) {
+            return response.data;
+          } else {
+            return review;
+          }
+        })
+      );
+      successCallback();
+      handleClose;
+    });
+  };
 
   return (
     <main>
@@ -112,7 +128,7 @@ export function Content() {
       <ReviewsNew onCreateReview={handleCreateReview} />
       <MoviesIndex movies={movies} onShowMovie={handleShowMovie} />
       <Modal3 show={isReviewsShowVisible} onClose={handleClose}>
-        <ReviewsShow review={currentReview} />
+        <ReviewsShow review={currentReview} onUpdateReview={handleUpdateReview} />
       </Modal3>
       <ReviewsIndex reviews={reviews} onShowReview={handleShowReview} />
       <FavoritesIndex favorites={favorites} onShowFavorite={handleShowFavorite} />
