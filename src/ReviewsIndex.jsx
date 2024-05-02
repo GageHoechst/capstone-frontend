@@ -2,7 +2,7 @@
 export function ReviewsIndex(props) {
   return (
     <div>
-      <h1>All reviews</h1>
+      <h2>All reviews</h2>
       {props.reviews.map((review) => (
         <div key={review.id}>
           <h3>{review.name}</h3>
