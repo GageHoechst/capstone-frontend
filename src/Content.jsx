@@ -9,8 +9,10 @@ import { FavoritesNew } from "./FavoritesNew";
 import { FavoritesShow } from "./FavoritesShow";
 import { ReviewsIndex } from "./ReviewsIndex";
 import { ReviewsNew } from "./ReviewsNew";
+import { ReviewsShow } from "./ReviewsShow";
 import { Modal } from "./Modal";
 import { Modal2 } from "./Modal2";
+import { Modal3 } from "./Modal3";
 import { useEffect, useState } from "react";
 
 export function Content() {
@@ -19,6 +21,8 @@ export function Content() {
   const [currentMovie, setCurrentMovie] = useState({});
   const [isFavoritesshowVisiible, setIsFavoritesShowVisible] = useState(false);
   const [currentFavorite, setCurrentFavorite] = useState({});
+  const [isReviewsShowVisible, setIsReviewsShowVisible] = useState(false);
+  const [currentReview, setCurrentReview] = useState({});
 
   const handleIndexMovies = () => {
     console.log("handleIndexMovies");
@@ -59,10 +63,16 @@ export function Content() {
     setIsFavoritesShowVisible(true);
     setCurrentFavorite(favorite);
   };
+  const handleShowReview = (review) => {
+    console.log("handleShowReview", review);
+    setIsReviewsShowVisible(true);
+    setCurrentReview(review);
+  };
   const handleClose = () => {
     console.log("handleClose");
     setIsMoviesShowVisible(false);
     setIsFavoritesShowVisible(false);
+    setIsReviewsShowVisible(false);
   };
 
   const handleDestroyFavorite = (id) => {
@@ -101,7 +111,10 @@ export function Content() {
       <FavoritesNew onCreateFavorite={handleCreateFavorite} />
       <ReviewsNew onCreateReview={handleCreateReview} />
       <MoviesIndex movies={movies} onShowMovie={handleShowMovie} />
-      <ReviewsIndex reviews={reviews} />
+      <Modal3 show={isReviewsShowVisible} onClose={handleClose}>
+        <ReviewsShow review={currentReview} />
+      </Modal3>
+      <ReviewsIndex reviews={reviews} onShowReview={handleShowReview} />
       <FavoritesIndex favorites={favorites} onShowFavorite={handleShowFavorite} />
       <Modal2 show={isFavoritesshowVisiible} onClose={handleClose}>
         <FavoritesShow favorite={currentFavorite} onDestroyFavorite={handleDestroyFavorite} />

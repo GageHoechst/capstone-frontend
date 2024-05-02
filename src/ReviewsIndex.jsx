@@ -8,6 +8,7 @@ export function ReviewsIndex(props) {
           <h3>{review.name}</h3>
           <p>Movie: {review.movie}</p>
           <p>Thoughts: {review.thoughts}</p>
+          <button onClick={() => props.onShowReview(review)}>Show review</button>
         </div>
       ))}
     </div>
