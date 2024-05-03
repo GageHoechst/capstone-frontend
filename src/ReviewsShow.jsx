@@ -3,7 +3,7 @@ export function ReviewsShow(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
-    props.onUpdateReview(props.review.id, params, () => event.target.resest());
+    props.onUpdateReview(props.review.id, params, () => event.target.reset());
   };
   return (
     <div>

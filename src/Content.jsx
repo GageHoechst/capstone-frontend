@@ -103,7 +103,7 @@ export function Content() {
   };
   const handleUpdateReview = (id, params, successCallback) => {
     console.log("handleUpdateReview", params);
-    axios.patch("http://localhost:3000/reviews/${id}.json", params).then((response) => {
+    axios.patch(`http://localhost:3000/reviews/${id}.json`, params).then((response) => {
       setReviews(
         reviews.map((review) => {
           if (review.id === response.data.id) {
